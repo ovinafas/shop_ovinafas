@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Categories Management - Laravel</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/backend/css/main.css" />
+    <link rel="stylesheet" type="text/css"
+        href="http://localhost:8000/backend/css/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body class="app sidebar-mini rtl">
+    <header class="app-header">
+        <a class="app-header__logo" href="#">Laravel</a>
+        <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+        <ul class="app-nav">
+            <li class="app-search">
+                <input class="app-search__input" type="search" placeholder="Search" />
+                <button class="app-search__button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </li>
+            <li class="dropdown">
+                <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i
+                        class="fa fa-bell-o fa-lg"></i></a>
+                <ul class="app-notification dropdown-menu dropdown-menu-right">
+                    <li class="app-notification__title">
+                        You have 4 new notifications.
+                    </li>
+                    <div class="app-notification__content">
+                        <li>
+                            <a class="app-notification__item" href="javascript:;">
+                                <span class="app-notification__icon">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                        <i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </span>
+                                <div>
+                                    <p class="app-notification__message">
+                                        Mail server not working
+                                    </p>
+                                    <p class="app-notification__meta">5 min ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="app-notification__item" href="javascript:;">
+                                <span class="app-notification__icon">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x text-success"></i>
+                                        <i class="fa fa-money fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </span>
+                                <div>
+                                    <p class="app-notification__message">
+                                        Transaction complete
+                                    </p>
+                                    <p class="app-notification__meta">2 days ago</p>
+                                </div>
+                            </a>
+                        </li>
+                    </div>
+                    <li class="app-notification__footer">
+                        <a href="#">See all notifications.</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- User Menu-->
+            <li class="dropdown">
+                <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i
+                        class="fa fa-user fa-lg"></i></a>
+                <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                    <li>
+                        <a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+
+    <aside class="app-sidebar">
+        <ul class="app-menu">
+            <li>
+                <a class="app-menu__item " href="http://localhost:8000/admin">
+                    <i class="app-menu__icon fa fa-dashboard"></i>
+                    <span class="app-menu__label">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item" href="">
+                    <i class="app-menu__icon fa fa-bar-chart"></i>
+                    <span class="app-menu__label">Orders</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item" href="">
+                    <i class="app-menu__icon fa fa-shopping-bag"></i>
+                    <span class="app-menu__label">Products</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item" href="">
+                    <i class="app-menu__icon fa fa-briefcase"></i>
+                    <span class="app-menu__label">Brands</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item active" href="http://localhost:8000/admin/categories">
+                    <i class="app-menu__icon fa fa-tags"></i>
+                    <span class="app-menu__label">Categories</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item" href="">
+                    <i class="app-menu__icon fa fa-th"></i>
+                    <span class="app-menu__label">Attributes</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item" href="">
+                    <i class="app-menu__icon fa fa-cogs"></i>
+                    <span class="app-menu__label">Settings</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="app-content" id="app">
+        <div class="app-title">
+            <div>
+                <h1><i class="fa fa-tags"></i> Categories Management</h1>
+                <p>All Categories</p>
+            </div>
+            <a href="http://localhost:8000/admin/categories/create" class="btn btn-primary pull-right">Add Category</a>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th> # </th>
+                                    <th> Name </th>
+                                    <th> Slug </th>
+                                    <th class="text-center"> Parent </th>
+                                    <th class="text-center"> Featured </th>
+                                    <th class="text-center"> Menu </th>
+                                    <th class="text-center"> Order </th>
+                                    <th style="width:100px; min-width:100px;" class="text-center text-danger"><i
+                                            class="fa fa-bolt"> </i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Mr. Zack Toy</td>
+                                    <td>mr-zack-toy</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/2/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/2" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Kole Zboncak</td>
+                                    <td>kole-zboncak</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/3/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/3" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Dr. Carol Haag</td>
+                                    <td>dr-carol-haag</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/4/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/4" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Cecile Graham</td>
+                                    <td>cecile-graham</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/5/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/5" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Mrs. Bernadette Schmidt Jr.</td>
+                                    <td>mrs-bernadette-schmidt-jr</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/6/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/6" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Dessie Purdy</td>
+                                    <td>dessie-purdy</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/7/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/7" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Talon Pfeffer</td>
+                                    <td>talon-pfeffer</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/8/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/8" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Shawn Koepp</td>
+                                    <td>shawn-koepp</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/9/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/9" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Raven Renner</td>
+                                    <td>raven-renner</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/10/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/10" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Ramon Farrell</td>
+                                    <td>ramon-farrell</td>
+                                    <td>Root</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-danger">No</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">Yes</span>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="http://localhost:8000/admin/categories/11/edit"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
+                                            <form action="http://localhost:8000/admin/categories/11" method="post"
+                                                style="display: inline"><input type="hidden" name="_method"
+                                                    value="DELETE"> <input type="hidden" name="_token"
+                                                    value="fOWNDK0Bb8XDXvjbyDzZCNzArfGVBxPIdLr1DQ1a"> <button
+                                                    type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="http://localhost:8000/backend/js/jquery-3.4.1.min.js"></script>
+    <script src="http://localhost:8000/backend/js/popper.min.js"></script>
+    <script src="http://localhost:8000/backend/js/bootstrap.min.js"></script>
+
+
+
+
+
+</body>
+
+</html>
